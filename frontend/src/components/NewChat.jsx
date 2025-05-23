@@ -32,6 +32,7 @@ import {
   Spinner,
 } from '@chakra-ui/react';
 import { ArrowBackIcon, SearchIcon, AddIcon } from '@chakra-ui/icons';
+import { setDocumentTitle } from '../utils/title';
 
 export default function NewChat() {
   const navigate = useNavigate();
@@ -45,6 +46,7 @@ export default function NewChat() {
   const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
 
   useEffect(() => {
+    setDocumentTitle('New Chat');
     loadUsers();
   }, []);
 

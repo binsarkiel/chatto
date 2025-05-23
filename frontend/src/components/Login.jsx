@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import {
   Box,
@@ -12,6 +12,7 @@ import {
   useToast,
   Link,
 } from '@chakra-ui/react';
+import { setDocumentTitle } from '../utils/title';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -19,6 +20,10 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setDocumentTitle('Login');
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

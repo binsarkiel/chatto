@@ -14,6 +14,7 @@ import {
   Avatar,
 } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
+import { setDocumentTitle } from '../utils/title';
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ export default function Profile() {
   });
 
   useEffect(() => {
+    setDocumentTitle('Profile');
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     setFormData(prev => ({
       ...prev,

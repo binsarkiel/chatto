@@ -7,6 +7,8 @@ import ChatList from './components/ChatList';
 import ChatWindow from './components/ChatWindow';
 import NewChat from './components/NewChat';
 import AppLayout from './components/layout/AppLayout';
+import { setDocumentTitle } from './utils/title';
+import { useEffect } from 'react';
 
 // Custom theme configuration
 const theme = extendTheme({
@@ -49,6 +51,10 @@ const AuthLayout = ({ children }) => (
 );
 
 export default function App() {
+  useEffect(() => {
+    setDocumentTitle(); // Set default title
+  }, []);
+
   return (
     <ChakraProvider theme={theme}>
       <Router>

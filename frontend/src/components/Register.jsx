@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import {
   Box,
@@ -12,6 +12,7 @@ import {
   useToast,
   Link,
 } from '@chakra-ui/react';
+import { setDocumentTitle } from '../utils/title';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -23,6 +24,10 @@ export default function Register() {
     confirmPassword: '',
   });
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setDocumentTitle('Register');
+  }, []);
 
   const handleChange = (e) => {
     setFormData({

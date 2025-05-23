@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import {
   Box,
   Button,
@@ -19,11 +20,16 @@ import { ChevronDownIcon, AddIcon } from '@chakra-ui/icons';
 import { useAuth } from '../hooks/useAuth';
 import { useChatList } from '../hooks/useChatList';
 import { ROUTES, AVATAR_COLORS } from '../constants';
+import { setDocumentTitle } from '../utils/title';
 
 export default function ChatList() {
   const navigate = useNavigate();
   const { user, logout, isLoading: isUserLoading } = useAuth();
   const { chatList, isLoading: isChatsLoading } = useChatList();
+
+  useEffect(() => {
+    setDocumentTitle('Chats');
+  }, []);
 
   const getOtherParticipant = (chat) => {
     if (!chat) return 'Unknown';

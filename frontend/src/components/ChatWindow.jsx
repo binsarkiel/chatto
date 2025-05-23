@@ -28,6 +28,7 @@ import {
 import { ArrowBackIcon, SearchIcon, AddIcon } from '@chakra-ui/icons';
 import { chats } from '../utils/api';
 import socketService from '../services/socket';
+import { setDocumentTitle } from '../utils/title';
 
 // Header Component
 const ChatHeader = ({ chat, user, onBack, onAddMembers }) => (
@@ -219,6 +220,13 @@ export default function ChatWindow() {
       socketService.leaveChat(chatId, isGroup);
     };
   }, [chatId, isGroup]);
+
+  useEffect(() => {
+    if (chat) {
+      const chatName = chat.name || chat.participants?.find(p => p._id !== user.id)?.fullName || 'Chat';
+      setDocumentTitle(chatName);
+    }
+  }, [chat, user.id]);
 
   const loadChat = async () => {
     try {

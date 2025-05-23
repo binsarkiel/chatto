@@ -1,0 +1,16 @@
+{
+  "short_name": "Chatto",
+  "name": "Chatto - Real-time Chat",
+  "icons": [
+    {
+      "src": "chat-icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#3182ce",
+  "background_color": "#ffffff"
+} 

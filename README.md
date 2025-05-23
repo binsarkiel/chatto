@@ -72,7 +72,7 @@ chatto/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/chatto.git
+git clone https://github.com/binsarkiel/chatto.git
 cd chatto
 ```
 

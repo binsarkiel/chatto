@@ -53,11 +53,44 @@ Chatto is a modern real-time chat application that supports both direct messagin
 - PostgreSQL (v12 or higher)
 - npm or yarn package manager
 
+## Environment Setup
+
+1. Copy the environment example file:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Edit the `.env` file with your configuration:
+   ```env
+   # Server Configuration
+   PORT=3000
+   NODE_ENV=development
+
+   # Database Configuration
+   DB_HOST=localhost
+   DB_PORT=5432
+   DB_NAME=chatapp
+   DB_USER=postgres
+   DB_PASSWORD=your_password_here
+
+   # JWT Configuration
+   JWT_SECRET=your_jwt_secret_key_here
+   JWT_EXPIRES_IN=24h
+
+   # Socket.IO Configuration
+   SOCKET_CORS_ORIGIN=http://localhost:3000
+   ```
+
+3. Important environment variables to configure:
+   - `DB_PASSWORD`: Your PostgreSQL database password
+   - `JWT_SECRET`: A secure random string for JWT token generation
+   - `SOCKET_CORS_ORIGIN`: Your frontend URL (for production)
+
 ## Installation
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/binsarkiel/chatto.git
    cd chatto
    ```
 

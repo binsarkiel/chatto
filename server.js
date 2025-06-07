@@ -4,12 +4,13 @@ const { Server } = require('socket.io');
 const { Pool } = require('pg');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: process.env.SOCKET_CORS_ORIGIN || "*",
     methods: ["GET", "POST"]
   },
   transports: ['websocket', 'polling'],
@@ -20,15 +21,17 @@ const io = new Server(server, {
 app.use(express.json());
 app.use(express.static('public'));
 
+// Replace the hardcoded database configuration
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'chatapp',
-  password: 'postgres', // Update with your PostgreSQL password
-  port: 5432,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
 });
 
-const JWT_SECRET = 'your_jwt_secret_key'; // Replace with a secure key in production
+// Replace the hardcoded JWT secret
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // Test database connection on startup
 pool.query('SELECT NOW()', (err, res) => {
@@ -92,7 +95,11 @@ app.post('/api/signup', async (req, res) => {
 });
 
 app.post('/api/login', verifyUser, (req, res) => {
-  const token = jwt.sign({ userId: req.user.id }, JWT_SECRET, { expiresIn: '1h' });
+  const token = jwt.sign(
+    { userId: req.user.id }, 
+    JWT_SECRET, 
+    { expiresIn: process.env.JWT_EXPIRES_IN || '1h' }
+  );
   res.json({ user: { id: req.user.id, username: req.user.username }, token });
 });
 
